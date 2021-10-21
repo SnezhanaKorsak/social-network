@@ -1,0 +1,28 @@
+.nav {
+    grid-area: n;
+    background-color: #ff4b4c;
+    padding: 10px;
+}
+.item a {
+    display: block;
+    border: 3px solid;
+    border-color: transparent transparent whitesmoke whitesmoke;
+    border-bottom-left-radius: 20px;
+    padding: 0 0 8px 10px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.item a.active {
+    color: #d39bff;
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+.item a:hover {
+    color: #d39bff;
+    font-size: 1.5em;
+font-weight: bolder;
+}

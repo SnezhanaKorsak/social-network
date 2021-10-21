@@ -1,0 +1,28 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+}
+.dialogsItem {
+    padding: 10px;
+}
+.messages {
+    padding: 10px;
+}
+
+span {
+    display: inline-block;
+}
+button {
+    width: 100px;
+    height: 30px;
+    background-color: #ff4b4c;
+    margin-left: 10px;
+}
+
+textarea {
+    width: 500px;
+    line-height: 50px;
+    font-size: x-large;
+    padding: 5px;
+    margin: 10px 0px 5px 10px;
+}

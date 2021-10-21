@@ -1,0 +1,19 @@
+.contentInfo {
+    display: grid;
+    grid-template-columns: 2fr 15fr;
+    grid-gap: 5px;
+    padding: 10px;
+}
+
+
+.mainAvatar img {
+    height: 150px;
+}
+
+.cover img {
+    width: 1000px;
+    height: 350px;
+}
+.describeProfile {
+    padding: 10px;
+}

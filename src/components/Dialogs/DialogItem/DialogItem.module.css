@@ -1,0 +1,9 @@
+.dialog a.active {
+    color: crimson;
+    font-size: x-large;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: crimson;
+}
