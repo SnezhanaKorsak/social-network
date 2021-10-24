@@ -1,3 +1,7 @@
+import {addPostAC, onPostChangeAC, profileReducer} from "./profileReducer";
+import {addMessageAC, dialogReducer, onMessageChangeAC} from "./dialogsReducer";
+import {sideBarReducer} from "./sideBarReducer";
+
 export type MessagesType = {
     id: number;
     message: string;
@@ -18,6 +22,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogsType>;
     messages: Array<MessagesType>;
+    newTextMessage: string
 }
 export type SidebarType = {}
 export type RootStateType = {
@@ -31,13 +36,12 @@ export type StoreType = {
     _callSubscriber: () => void
     getState: () => RootStateType
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionSType) => void
+    dispatch: (action: ActionsType) => void
 }
 
-export type ActionSType = ReturnType<typeof addPostAC> | ReturnType<typeof onPostChangeAC>;
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof onPostChangeAC>
+    | ReturnType<typeof addMessageAC> | ReturnType<typeof onMessageChangeAC>
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 
 export const store: StoreType = {
     _state: {
@@ -60,7 +64,8 @@ export const store: StoreType = {
                 {id: 2, message: "Don't give up!"},
                 {id: 3, message: "Just do it"},
                 {id: 4, message: "Could you help me?"}
-            ]
+            ],
+            newTextMessage: '',
         },
         sidebar: {}
     },
@@ -74,34 +79,15 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
 
-    dispatch (action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: action.postText,
-                likeCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._callSubscriber()
-        } else if (action.type === UPDATE_NEW_POST) {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
-        }
+    dispatch(action) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._state.sidebar = sideBarReducer(this._state.sidebar, action)
+
+        this._callSubscriber()
     }
 }
 
-export const  addPostAC = (postText: string) => {
-    return {
-        type: ADD_POST,
-        postText: postText
-    } as const
-}
 
-export const onPostChangeAC = (newText: string)=> {
-    return {
-        type: UPDATE_NEW_POST,
-        newText: newText
-    } as const
-}
 
 

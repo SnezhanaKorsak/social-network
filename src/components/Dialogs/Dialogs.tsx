@@ -1,18 +1,25 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogPageType} from "../../redux/state";
+import {ActionsType, DialogPageType} from "../../redux/state";
+import {addMessageAC, onMessageChangeAC} from "../../redux/dialogsReducer";
 
 
 type DialogsProps = {
     state: DialogPageType;
+    message: string
+    dispatch: (action: ActionsType) => void
 }
 
 export function Dialogs(props: DialogsProps) {
-    const newMessageElement = React.createRef<HTMLTextAreaElement>()
+
     const addMessage = () => {
-        alert(newMessageElement.current?.value)
+        props.dispatch(addMessageAC(props.message))
+        props.dispatch(onMessageChangeAC(''))
+    }
+    const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(onMessageChangeAC(e.currentTarget.value))
     }
 
     let dialogElements =
@@ -23,7 +30,7 @@ export function Dialogs(props: DialogsProps) {
 
     return (
         <>
-            <textarea ref={newMessageElement}/>
+            <textarea value={props.message} onChange={onMessageChange}/>
 
             <div>
                 <button onClick={addMessage}>Add Message</button>
@@ -42,7 +49,5 @@ export function Dialogs(props: DialogsProps) {
 
             </div>
         </>
-
-
     )
 }

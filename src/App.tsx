@@ -8,12 +8,12 @@ import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionSType, StoreType} from "./redux/state";
+import {ActionsType, StoreType} from "./redux/state";
 
 
 type AppPropsType = {
     store: StoreType
-    dispatch: (action: ActionSType) => void
+    dispatch: (action: ActionsType) => void
 }
 export const PATH = {
     PROFILE: '/profile',
@@ -41,7 +41,10 @@ function App(props: AppPropsType) {
                                                       dispatch={props.dispatch}
                                />}/>
                         <Route path={PATH.DIALOGS}
-                               render={() => <Dialogs state={state.dialogPage}/>}/>
+                               render={() => <Dialogs state={state.dialogPage}
+                                                      message={state.dialogPage.newTextMessage}
+                                                      dispatch={props.dispatch}
+                               />}/>
                         <Route path={PATH.NEWS} render={() => <News/>}/>
                         <Route path={PATH.MUSIC} render={() => <Music/>}/>
                         <Route path={PATH.SETTINGS} render={() => <Settings/>}/>
