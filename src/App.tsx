@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
@@ -8,12 +7,13 @@ import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionsType, StoreType} from "./redux/state";
+import {StoreType} from "./redux/store";
+import './App.css';
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
-    store: StoreType
-    dispatch: (action: ActionsType) => void
+    /*store: StoreType*/
 }
 export const PATH = {
     PROFILE: '/profile',
@@ -25,7 +25,7 @@ export const PATH = {
 
 
 function App(props: AppPropsType) {
-    const state = props.store.getState();
+   /* const state = props.store.getState();*/
 
     return (
         <HashRouter>
@@ -37,14 +37,9 @@ function App(props: AppPropsType) {
                         <Route path={'/'} exact render={() => <Redirect to={PATH.PROFILE}/>}/>
 
                         <Route path={PATH.PROFILE}
-                               render={() => <Profile state={state.profilePage}
-                                                      dispatch={props.dispatch}
-                               />}/>
+                               render={() => <Profile />}/>
                         <Route path={PATH.DIALOGS}
-                               render={() => <Dialogs state={state.dialogPage}
-                                                      message={state.dialogPage.newTextMessage}
-                                                      dispatch={props.dispatch}
-                               />}/>
+                               render={() => <DialogsContainer />}/>
                         <Route path={PATH.NEWS} render={() => <News/>}/>
                         <Route path={PATH.MUSIC} render={() => <Music/>}/>
                         <Route path={PATH.SETTINGS} render={() => <Settings/>}/>

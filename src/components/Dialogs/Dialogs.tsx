@@ -2,35 +2,38 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsType, DialogPageType} from "../../redux/state";
-import {addMessageAC, onMessageChangeAC} from "../../redux/dialogsReducer";
+import { DialogPageType } from "../../redux/store";
 
 
 type DialogsProps = {
-    state: DialogPageType;
-    message: string
-    dispatch: (action: ActionsType) => void
+    newTextMessage: string
+    dialogPage: DialogPageType;
+    addMessage: (messageText: string) => void
+    onMessageChange: (newMessage: string) => void
 }
 
 export function Dialogs(props: DialogsProps) {
 
+
     const addMessage = () => {
-        props.dispatch(addMessageAC(props.message))
-        props.dispatch(onMessageChangeAC(''))
+        props.addMessage(props.newTextMessage)
+        props.onMessageChange('')
     }
     const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(onMessageChangeAC(e.currentTarget.value))
+        props.onMessageChange(e.currentTarget.value)
     }
 
     let dialogElements =
-        props.state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+        props.dialogPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
 
     let messagesElements =
-        props.state.messages.map(msg => <Message key={msg.id} message={msg.message} id={msg.id}/>);
+        props.dialogPage.messages.map(msg => <Message key={msg.id} message={msg.message} id={msg.id}/>);
 
     return (
         <>
-            <textarea value={props.message} onChange={onMessageChange}/>
+            <textarea value={props.newTextMessage}
+                      onChange={onMessageChange}
+                      placeholder={'Enter your message'}/>
 
             <div>
                 <button onClick={addMessage}>Add Message</button>
@@ -38,8 +41,6 @@ export function Dialogs(props: DialogsProps) {
 
             <div className={s.dialogs}>
 
-                {/*<textarea></textarea>
-                <button className={s.button}>add message</button>*/}
                 <div className={s.dialogsItem}>
                     {dialogElements}
                 </div>
