@@ -2,11 +2,10 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import { DialogPageType } from "../../redux/store";
+import {DialogPageType} from "../../redux/dialogsReducer";
 
 
 type DialogsProps = {
-    newTextMessage: string
     dialogPage: DialogPageType;
     addMessage: (messageText: string) => void
     onMessageChange: (newMessage: string) => void
@@ -16,7 +15,7 @@ export function Dialogs(props: DialogsProps) {
 
 
     const addMessage = () => {
-        props.addMessage(props.newTextMessage)
+        props.addMessage(props.dialogPage.newTextMessage)
         props.onMessageChange('')
     }
     const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -31,7 +30,7 @@ export function Dialogs(props: DialogsProps) {
 
     return (
         <>
-            <textarea value={props.newTextMessage}
+            <textarea value={props.dialogPage.newTextMessage}
                       onChange={onMessageChange}
                       placeholder={'Enter your message'}/>
 

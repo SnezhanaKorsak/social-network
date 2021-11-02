@@ -1,31 +1,31 @@
-import {addPostAC, onPostChangeAC, profileReducer} from "./profileReducer";
-import {addMessageAC, dialogReducer, onMessageChangeAC} from "./dialogsReducer";
+import {profileReducer} from "./profileReducer";
+import {dialogReducer} from "./dialogsReducer";
 import {sideBarReducer} from "./sideBarReducer";
 
-export type MessagesType = {
+type MessagesType = {
     id: number;
     message: string;
 }
-export type DialogsType = {
+type DialogsType = {
     id: number;
     name: string;
 }
-export type PostsType = {
+type PostsType = {
     id: number;
     message: string;
     likeCount: number;
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostsType>;
     newPostText: string
 }
-export type DialogPageType = {
+type DialogPageType = {
     dialogs: Array<DialogsType>;
     messages: Array<MessagesType>;
     newTextMessage: string
 }
-export type SidebarType = {}
-export type RootStateType = {
+type SidebarType = {}
+type RootStateType = {
     profilePage: ProfilePageType;
     dialogPage: DialogPageType;
     sidebar: SidebarType;
@@ -36,14 +36,18 @@ export type StoreType = {
     _callSubscriber: () => void
     getState: () => RootStateType
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionsType) => void
+    /*dispatch: (action: ActionType) => void*/
 }
 
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof onPostChangeAC>
+type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof addMessageAC> | ReturnType<typeof onMessageChangeAC>
 
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
 
-export const store: StoreType = {
+ const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -77,7 +81,7 @@ export const store: StoreType = {
     },
     subscribe(observer) {
         this._callSubscriber = observer
-    },
+    }/*,
 
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
@@ -85,9 +89,34 @@ export const store: StoreType = {
         this._state.sidebar = sideBarReducer(this._state.sidebar, action)
 
         this._callSubscriber()
-    }
+    }*/
 }
 
 
+const addPostAC = (postText: string) => {
+    return {
+        type: ADD_POST,
+        postText: postText
+    } as const
+}
 
+const onPostChangeAC = (newText: string) => {
+    return {
+        type: UPDATE_NEW_POST,
+        newText: newText
+    } as const
+}
 
+const addMessageAC = (messageText: string) => {
+    return {
+        type: ADD_MESSAGE,
+        messageText: messageText
+    } as const
+}
+
+const onMessageChangeAC = (newMessage: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE,
+        newMessage: newMessage
+    } as const
+}
