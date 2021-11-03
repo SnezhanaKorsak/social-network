@@ -20,6 +20,9 @@ export function Navbar () {
                     <NavLink to={PATH.MUSIC} activeClassName={s.active}>Music</NavLink>
                 </div>
                 <div className={s.item}>
+                    <NavLink to={PATH.FIND_FRIENDS} activeClassName={s.active}>Friends</NavLink>
+                </div>
+                <div className={s.item}>
                     <NavLink to={PATH.SETTINGS} activeClassName={s.active}>Settings</NavLink>
                 </div>
             </nav>

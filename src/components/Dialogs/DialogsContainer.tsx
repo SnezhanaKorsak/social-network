@@ -49,7 +49,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addMessage: (messageText: string) => {
             dispatch(addMessageAC(messageText))
-            dispatch(onMessageChangeAC(''))
         },
         onMessageChange: (newMessage: string) => {
             dispatch(onMessageChangeAC(newMessage))

@@ -39,9 +39,7 @@ export const dialogReducer = (state = initialState, action: ActionType):DialogPa
             id:  new Date().getTime(),
             message: action.messageText
         }
-           // state.messages.push(newMessage)
-
-            return {...state, messages: [...state.messages, newMessage]}
+            return {...state, messages: [...state.messages, newMessage], newTextMessage: ''}
 
         case UPDATE_NEW_MESSAGE:
            // state.newTextMessage = action.newMessage

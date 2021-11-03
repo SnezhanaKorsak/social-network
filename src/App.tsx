@@ -2,14 +2,13 @@ import React from 'react';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {StoreType} from "./redux/store";
 import './App.css';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {FriendsContainer} from "./components/Friends/FriendsContainer";
 
 
 type AppPropsType = {
@@ -20,7 +19,8 @@ export const PATH = {
     DIALOGS: '/dialogs',
     NEWS: '/news',
     MUSIC: '/music',
-    SETTINGS: '/settings'
+    SETTINGS: '/settings',
+    FIND_FRIENDS: '/findFriends'
 }
 
 
@@ -42,6 +42,7 @@ function App(props: AppPropsType) {
                                render={() => <DialogsContainer />}/>
                         <Route path={PATH.NEWS} render={() => <News/>}/>
                         <Route path={PATH.MUSIC} render={() => <Music/>}/>
+                        <Route path={PATH.FIND_FRIENDS} render={() => <FriendsContainer/>}/>
                         <Route path={PATH.SETTINGS} render={() => <Settings/>}/>
                     </Switch>
                 </div>

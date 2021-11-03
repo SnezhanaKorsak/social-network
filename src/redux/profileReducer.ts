@@ -31,7 +31,7 @@ export const profileReducer = (state= initialState, action: ActionType): Profile
             }
            // state.posts.push(newPost)
 
-            return {...state, posts: [...state.posts, newPost]};
+            return {...state, posts: [...state.posts, newPost], newPostText: ''};
 
         case UPDATE_NEW_POST:
             return {...state, newPostText: action.newText};

@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addPost: (message: string) => {
             dispatch(addPostAC(message))
-            dispatch(onPostChangeAC(''))
         },
         updateNewPost: (newText: string) => {
             dispatch(onPostChangeAC(newText))

@@ -35,7 +35,7 @@ export function Dialogs(props: DialogsProps) {
                       placeholder={'Enter your message'}/>
 
             <div>
-                <button onClick={addMessage}>Add Message</button>
+                <button className={s.button} onClick={addMessage}>Add Message</button>
             </div>
 
             <div className={s.dialogs}>
