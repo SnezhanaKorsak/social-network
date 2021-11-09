@@ -1,26 +1,26 @@
 import React from "react";
-import {FriendType, initialStateType} from "../../redux/friendsReducer";
 import s from "./Friends.module.css";
 import userPhoto from "../../assets/images/avatarnotfound.jpg";
 import axios from "axios";
+import {FriendsPropsType} from "./FriendsContainer";
 
-type FriendsPropsType = {
-    friendsPage: initialStateType
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setFriends: (friends: Array<FriendType>) => void
-}
 
 export class Friends extends React.Component<FriendsPropsType> {
 
-    constructor(props:FriendsPropsType) {
-
-        super(props);
-        debugger
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+    componentDidMount(): void {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setFriends(response.data.items);
+                this.props.setTotalCount(response.data.totalCount)
+            })
+    }
+    currentPageHandler (page: number){
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setFriends(response.data.items)
             })
+
     }
 
     render(): React.ReactNode {
@@ -28,8 +28,26 @@ export class Friends extends React.Component<FriendsPropsType> {
             followStatus ? this.props.unfollow(fId) : this.props.follow(fId)
         }
 
+        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            if(i < 8) {
+                pages.push(i)
+            }
+
+        }
+
         return (
             <div>
+                {/*<div>
+                    {pages.map(p => {
+                            return <span className={`${this.props.currentPage === p && s.selectedPage}`}
+                            onClick={()=>this.currentPageHandler(p)}>
+                                {p}</span>
+                        }
+                    )}
+                </div>
+*/}
                 {this.props.friendsPage.friends.map(f => <div key={f.id} className={s.friendsItem}>
                 <span className={s.generalBlock}>
                     <div>

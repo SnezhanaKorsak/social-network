@@ -16,24 +16,34 @@ export type FriendType = {
 }
 export type initialStateType = {
     friends: Array<FriendType>
+    pageSize: number
+    totalCount: number
+    currentPage: number
 }
 
 
 const initialState: initialStateType = {
-    friends: []
-
+    friends: [],
+    pageSize: 4,
+    totalCount: 0,
+    currentPage: 1
 }
 
 export const friendsReducer = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case "FOLLOW":
-            return {...state, friends: state.friends.map(f => f.id === action.userId ? {...f, follow: true} : f)};
+            return {...state, friends: state.friends.map(f => f.id === action.userId ? {...f, followed: true} : f)};
 
         case "UNFOLLOW":
-            return {...state, friends: state.friends.map(f => f.id === action.userId ? {...f, follow: false} : f)};
+            return {...state, friends: state.friends.map(f => f.id === action.userId ? {...f, followed: false} : f)};
 
         case "SET-FRIENDS":
-            return {...state, friends: [...action.friends]}
+            return {...state, friends: action.friends}
+
+        case "SET-CURRENT-PAGE":
+            return {...state, currentPage: action.page}
+        case "SET-TOTAL-COUNT":
+            return {...state, totalCount: action.totalCount}
 
         default:
             return state
@@ -43,7 +53,9 @@ export const friendsReducer = (state = initialState, action: ActionType): initia
 
 type ActionType = ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setFriendsAC>
+    ReturnType<typeof setFriendsAC> |
+    ReturnType<typeof setCurrentPageAC>|
+    ReturnType<typeof setTotalCountAC>
 
 export const followAC = (userId: number) => {
     return {
@@ -63,5 +75,17 @@ export const setFriendsAC = (friends: Array<FriendType>) => {
     return {
         type: "SET-FRIENDS",
         friends
+    } as const
+}
+export const setCurrentPageAC = (page: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        page
+    } as const
+}
+export const setTotalCountAC = (totalCount: number) => {
+    return {
+        type: "SET-TOTAL-COUNT",
+        totalCount
     } as const
 }

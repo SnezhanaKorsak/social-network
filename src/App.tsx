@@ -9,6 +9,7 @@ import {Settings} from "./components/Settings/Settings";
 import './App.css';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
+import {FriendsPage} from "./components/Friends/FriendsPage";
 
 
 type AppPropsType = {
@@ -42,7 +43,7 @@ function App(props: AppPropsType) {
                                render={() => <DialogsContainer />}/>
                         <Route path={PATH.NEWS} render={() => <News/>}/>
                         <Route path={PATH.MUSIC} render={() => <Music/>}/>
-                        <Route path={PATH.FIND_FRIENDS} render={() => <FriendsContainer/>}/>
+                        <Route path={PATH.FIND_FRIENDS} render={() => <FriendsPage/>}/>
                         <Route path={PATH.SETTINGS} render={() => <Settings/>}/>
                     </Switch>
                 </div>

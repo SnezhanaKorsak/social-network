@@ -1,0 +1,49 @@
+.paginationBlock {
+    display: grid;
+    grid-template-columns: 150px 200px 2fr;
+    grid-column-gap: 20px;
+    grid-template-areas:"c p n";
+    height: 40px;
+}
+.totalCounter, .currentPage  {
+    grid-area: c;
+    color: #ff4b4c;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    border-right: 2px solid whitesmoke;
+    line-height: 40px;
+    padding-left: 10px;
+}
+.currentPage {
+    grid-area: p;
+}
+.totalBlocks {
+    padding: 0;
+    margin: 5px 5px 0 250px;
+    grid-area: n;
+}
+
+.pageItem {
+    display: inline-block;
+    width: 30px;
+    height: 25px;
+    background: #ff4b4c;
+    margin: 0 4px 0 4px;
+    padding: 2px;
+    color: whitesmoke;
+    font-size: 0.9em;
+    cursor: pointer;
+    text-align: center;
+    line-height: 25px;
+}
+
+
+.selectedPage {
+    font-weight: bolder;
+    border: 3px solid white;
+    color: white;
+}
+
+.selectedItem {
+    font-weight: bolder;
+}

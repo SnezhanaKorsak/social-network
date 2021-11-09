@@ -47,3 +47,7 @@
 .location {
     padding-top: 10px;
 }
+
+.selectedPage {
+    font-weight: bolder;
+}
