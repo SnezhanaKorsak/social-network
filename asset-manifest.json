@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/social-network/static/css/main.76660a28.chunk.css",
-    "main.js": "/social-network/static/js/main.ed41e781.chunk.js",
-    "main.js.map": "/social-network/static/js/main.ed41e781.chunk.js.map",
-    "runtime-main.js": "/social-network/static/js/runtime-main.c0deb5f0.js",
-    "runtime-main.js.map": "/social-network/static/js/runtime-main.c0deb5f0.js.map",
-    "static/js/2.d8bf6454.chunk.js": "/social-network/static/js/2.d8bf6454.chunk.js",
-    "static/js/2.d8bf6454.chunk.js.map": "/social-network/static/js/2.d8bf6454.chunk.js.map",
-    "static/js/3.6c871f70.chunk.js": "/social-network/static/js/3.6c871f70.chunk.js",
-    "static/js/3.6c871f70.chunk.js.map": "/social-network/static/js/3.6c871f70.chunk.js.map",
+    "main.css": "/social-network/static/css/main.f0da2fb2.chunk.css",
+    "main.js": "/social-network/static/js/main.57ddd91e.chunk.js",
+    "main.js.map": "/social-network/static/js/main.57ddd91e.chunk.js.map",
+    "runtime-main.js": "/social-network/static/js/runtime-main.d656c928.js",
+    "runtime-main.js.map": "/social-network/static/js/runtime-main.d656c928.js.map",
+    "static/js/2.c6325c7d.chunk.js": "/social-network/static/js/2.c6325c7d.chunk.js",
+    "static/js/2.c6325c7d.chunk.js.map": "/social-network/static/js/2.c6325c7d.chunk.js.map",
+    "static/js/3.91fb2f02.chunk.js": "/social-network/static/js/3.91fb2f02.chunk.js",
+    "static/js/3.91fb2f02.chunk.js.map": "/social-network/static/js/3.91fb2f02.chunk.js.map",
     "index.html": "/social-network/index.html",
-    "static/css/main.76660a28.chunk.css.map": "/social-network/static/css/main.76660a28.chunk.css.map",
-    "static/js/2.d8bf6454.chunk.js.LICENSE.txt": "/social-network/static/js/2.d8bf6454.chunk.js.LICENSE.txt",
+    "static/css/main.f0da2fb2.chunk.css.map": "/social-network/static/css/main.f0da2fb2.chunk.css.map",
+    "static/js/2.c6325c7d.chunk.js.LICENSE.txt": "/social-network/static/js/2.c6325c7d.chunk.js.LICENSE.txt",
     "static/media/avatarnotfound.86317f4b.jpg": "/social-network/static/media/avatarnotfound.86317f4b.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c0deb5f0.js",
-    "static/js/2.d8bf6454.chunk.js",
-    "static/css/main.76660a28.chunk.css",
-    "static/js/main.ed41e781.chunk.js"
+    "static/js/runtime-main.d656c928.js",
+    "static/js/2.c6325c7d.chunk.js",
+    "static/css/main.f0da2fb2.chunk.css",
+    "static/js/main.57ddd91e.chunk.js"
   ]
 }
