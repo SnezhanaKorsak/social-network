@@ -2,6 +2,8 @@ import React from "react";
 import s from "./Friends.module.css";
 import userPhoto from "../../assets/images/avatarnotfound.jpg";
 import {initialStateType} from "../../redux/friendsReducer";
+import {NavLink} from "react-router-dom";
+import {PATH} from "../../App";
 
 type FriendsPropsType = {
     friendsPage: initialStateType
@@ -35,8 +37,10 @@ export const Friends = (
             {friendsPage.friends.map(f => <div key={f.id} className={s.friendsItem}>
                 <span className={s.generalBlock}>
                     <div>
-                        <img className={s.avatar} alt={'userAvatar'}
-                             src={f.photos.small != null ? f.photos.small : userPhoto}/>
+                        <NavLink to={PATH.PROFILE + f.id}>
+                            <img className={s.avatar} alt={'userAvatar'}
+                                      src={f.photos.small != null ? f.photos.small : userPhoto}/>
+                        </NavLink>
                     </div>
 
                     <span className={s.info}>
