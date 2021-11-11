@@ -28,7 +28,7 @@
     width: 30px;
     height: 25px;
     background: #ff4b4c;
-    margin: 0 4px 0 4px;
+    margin: 0 1px 0 1px;
     padding: 2px;
     color: whitesmoke;
     font-size: 0.9em;
@@ -47,3 +47,4 @@
 .selectedItem {
     font-weight: bolder;
 }
+

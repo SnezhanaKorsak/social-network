@@ -1,45 +1,29 @@
 import React from "react";
 import s from "./Friends.module.css";
 import userPhoto from "../../assets/images/avatarnotfound.jpg";
-import axios from "axios";
-import {FriendsPropsType} from "./FriendsContainer";
+import {initialStateType} from "../../redux/friendsReducer";
 
+type FriendsPropsType = {
+    friendsPage: initialStateType
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
 
-export class Friends extends React.Component<FriendsPropsType> {
+export const Friends = (
+    {
+        friendsPage,
+        follow,
+        unfollow,
+        ...restProps
+    }: FriendsPropsType) => {
 
-    componentDidMount(): void {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setFriends(response.data.items);
-                this.props.setTotalCount(response.data.totalCount)
-            })
-    }
-    currentPageHandler (page: number){
-        this.props.setCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setFriends(response.data.items)
-            })
-
+    const followHandler = (fId: number, followStatus: boolean) => {
+        followStatus ? unfollow(fId) : follow(fId)
     }
 
-    render(): React.ReactNode {
-        const followHandler = (fId: number, followStatus: boolean) => {
-            followStatus ? this.props.unfollow(fId) : this.props.follow(fId)
-        }
-
-        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            if(i < 8) {
-                pages.push(i)
-            }
-
-        }
-
-        return (
-            <div>
-                {/*<div>
+    return (
+        <>
+            {/*<div>
                     {pages.map(p => {
                             return <span className={`${this.props.currentPage === p && s.selectedPage}`}
                             onClick={()=>this.currentPageHandler(p)}>
@@ -48,7 +32,7 @@ export class Friends extends React.Component<FriendsPropsType> {
                     )}
                 </div>
 */}
-                {this.props.friendsPage.friends.map(f => <div key={f.id} className={s.friendsItem}>
+            {friendsPage.friends.map(f => <div key={f.id} className={s.friendsItem}>
                 <span className={s.generalBlock}>
                     <div>
                         <img className={s.avatar} alt={'userAvatar'}
@@ -70,11 +54,10 @@ export class Friends extends React.Component<FriendsPropsType> {
 
                     </span>
 
-
                 </span>
 
-                </div>)}
-            </div>
-        )
-    }
+            </div>)}
+        </>
+    )
+
 }

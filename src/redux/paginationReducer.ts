@@ -1,18 +1,18 @@
-import {FriendType} from "./friendsReducer";
+import {toggleIsFetching, setFriends} from "./friendsReducer";
 
 export type initialStateType = {
     pageLimit: number
-    totalRecords: number
-    pageNeighbours:  number
+    totalCount: number
+    pageNeighbours: number
     currentPage: number
 }
 
 
 const initialState: initialStateType = {
-    totalRecords: 0,
+    totalCount: 0,
     pageLimit: 4,
     pageNeighbours: 1,
-    currentPage: 5
+    currentPage: 1,
 }
 
 export const paginationReducer = (state = initialState, action: ActionType): initialStateType => {
@@ -20,7 +20,8 @@ export const paginationReducer = (state = initialState, action: ActionType): ini
         case "SET-CURRENT-PAGE":
             return {...state, currentPage: action.page}
         case "SET-TOTAL-COUNT":
-            return {...state, totalRecords: action.totalCount}
+            return {...state, totalCount: action.totalCount}
+
 
         default:
             return state
@@ -28,26 +29,22 @@ export const paginationReducer = (state = initialState, action: ActionType): ini
 
 }
 
-type ActionType = ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setTotalCountAC> |
-    ReturnType<typeof setFriendsAC>
+type ActionType = ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalCount>
+    | ReturnType<typeof setFriends>
+    | ReturnType<typeof toggleIsFetching>
 
 
-export const setCurrentPageAC = (page: number) => {
-    return {
-        type: "SET-CURRENT-PAGE",
-        page
-    } as const
-}
-export const setTotalCountAC = (totalCount: number) => {
+export const setTotalCount = (totalCount: number) => {
     return {
         type: "SET-TOTAL-COUNT",
         totalCount
     } as const
 }
-export const setFriendsAC = (friends: Array<FriendType>) => {
+export const setCurrentPage = (page: number) => {
     return {
-        type: "SET-FRIENDS",
-        friends
+        type: "SET-CURRENT-PAGE",
+        page
     } as const
 }
+

@@ -16,17 +16,13 @@ export type FriendType = {
 }
 export type initialStateType = {
     friends: Array<FriendType>
-    pageSize: number
-    totalCount: number
-    currentPage: number
+    isFetching: boolean
 }
 
 
 const initialState: initialStateType = {
     friends: [],
-    pageSize: 4,
-    totalCount: 0,
-    currentPage: 1
+    isFetching: false
 }
 
 export const friendsReducer = (state = initialState, action: ActionType): initialStateType => {
@@ -40,10 +36,8 @@ export const friendsReducer = (state = initialState, action: ActionType): initia
         case "SET-FRIENDS":
             return {...state, friends: action.friends}
 
-        case "SET-CURRENT-PAGE":
-            return {...state, currentPage: action.page}
-        case "SET-TOTAL-COUNT":
-            return {...state, totalCount: action.totalCount}
+        case "TOGGLE-IS-FETCHING":
+            return {...state, isFetching: action.isFetching}
 
         default:
             return state
@@ -51,41 +45,34 @@ export const friendsReducer = (state = initialState, action: ActionType): initia
 
 }
 
-type ActionType = ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setFriendsAC> |
-    ReturnType<typeof setCurrentPageAC>|
-    ReturnType<typeof setTotalCountAC>
+type ActionType = ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setFriends>
+    | ReturnType<typeof toggleIsFetching>
 
-export const followAC = (userId: number) => {
+
+export const follow = (userId: number) => {
     return {
         type: "FOLLOW",
         userId
     } as const
 }
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: "UNFOLLOW",
         userId
     } as const
 }
-
-export const setFriendsAC = (friends: Array<FriendType>) => {
+export const setFriends = (friends: Array<FriendType>) => {
     return {
         type: "SET-FRIENDS",
         friends
     } as const
 }
-export const setCurrentPageAC = (page: number) => {
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
-        type: "SET-CURRENT-PAGE",
-        page
-    } as const
-}
-export const setTotalCountAC = (totalCount: number) => {
-    return {
-        type: "SET-TOTAL-COUNT",
-        totalCount
+        type: "TOGGLE-IS-FETCHING",
+        isFetching
     } as const
 }

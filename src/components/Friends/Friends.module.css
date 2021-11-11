@@ -3,17 +3,18 @@
     width: 600px;
     height: 100px;
     background: white;
-    margin: 20px auto;
+    margin: 10px  0 20px 210px;
     border-radius: 10px;
 }
-.generalBlock{
+
+.generalBlock {
     display: grid;
     grid-template-columns: 70px 15fr 4fr;
 }
 
 .generalBlock .avatar {
     position: relative;
-    left: -50px;
+    left: -45px;
 
     width: 90px;
     height: 90px;
@@ -44,6 +45,7 @@
     font-size: 0.9em;
     cursor: pointer;
 }
+
 .location {
     padding-top: 10px;
 }
@@ -51,3 +53,5 @@
 .selectedPage {
     font-weight: bolder;
 }
+
+
