@@ -2,9 +2,9 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {FriendType, toggleIsFetching, setFriends} from "../../../redux/friendsReducer";
 import React from "react";
-import axios from "axios";
 import {Pagination} from "./Pagination";
 import {setCurrentPage, setTotalCount} from "../../../redux/paginationReducer";
+import { getUsers } from "../../../api/Api";
 
 export const LEFT_PAGE = 'LEFT';
 export const RIGHT_PAGE = 'RIGHT';
@@ -26,11 +26,10 @@ const range = (from: number | string, to: number, step = 1) => {
 class PaginationAPIComponent extends React.Component<PaginationAPIComponentPropsType> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageLimit}`)
-            .then(response => {
+        getUsers(this.props.currentPage, this.props.pageLimit).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setFriends(response.data.items);
-                this.props.setTotalCount(response.data.totalCount)
+                this.props.setFriends(data.items);
+                this.props.setTotalCount(data.totalCount)
             })
     }
 
@@ -83,10 +82,9 @@ class PaginationAPIComponent extends React.Component<PaginationAPIComponentProps
         this.props.toggleIsFetching(true)
         if (typeof page === "number") {
             this.props.setCurrentPage(page)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageLimit}`)
-                .then(response => {
+            getUsers(page, this.props.pageLimit).then(data => {
                     this.props.toggleIsFetching(false)
-                    this.props.setFriends(response.data.items)
+                    this.props.setFriends(data.items)
                 })
         }
     }
@@ -94,20 +92,18 @@ class PaginationAPIComponent extends React.Component<PaginationAPIComponentProps
         this.props.toggleIsFetching(true)
         const previousPage = this.props.currentPage - (this.props.pageNeighbours * 2) - 1
         this.props.setCurrentPage(previousPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${previousPage}&count=${this.props.pageLimit}`)
-            .then(response => {
+        getUsers(previousPage, this.props.pageLimit).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setFriends(response.data.items)
+                this.props.setFriends(data.items)
             })
     }
     handleMoveRight = () => {
         this.props.toggleIsFetching(true)
         const nextPage = this.props.currentPage + (this.props.pageNeighbours * 2) + 1
         this.props.setCurrentPage(nextPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${nextPage}&count=${this.props.pageLimit}`)
-            .then(response => {
+        getUsers(nextPage, this.props.pageLimit).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setFriends(response.data.items)
+                this.props.setFriends(data.items)
             })
     }
 

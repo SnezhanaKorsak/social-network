@@ -8,7 +8,7 @@ export function Navbar () {
     return (
             <nav className={s.nav}>
                 <div className={s.item}>
-                    <NavLink to={PATH.PROFILE} activeClassName={s.active}>Profile</NavLink>
+                    <NavLink to={PATH.PROFILE + '2'} activeClassName={s.active}>Profile</NavLink>
                 </div>
                 <div className={s.item}>
                     <NavLink to={PATH.DIALOGS} activeClassName={s.active}>Messages</NavLink>

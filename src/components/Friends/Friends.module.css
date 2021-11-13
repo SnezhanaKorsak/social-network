@@ -45,6 +45,9 @@
     font-size: 0.9em;
     cursor: pointer;
 }
+.buttonFollow:disabled {
+    background: lightgrey;
+}
 
 .location {
     padding-top: 10px;

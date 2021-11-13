@@ -5,11 +5,11 @@ import {ProfileType} from "../../redux/profileReducer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
-type ProfilePropType = {
+type ProfilePropsType = {
    profile: ProfileType | null
 }
 
-export const Profile: React.FC<ProfilePropType> = ({profile, ...restProps}) => {
+export const Profile: React.FC<ProfilePropsType> = ({profile}) => {
 
     return (
         <div className={s.content}>

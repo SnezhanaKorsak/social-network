@@ -7,3 +7,18 @@
 .header img {
     height: 100px;
 }
+
+.loginBlock {
+    float: right;
+    margin: 15px;
+    color: white;
+    padding: 5px;
+    font-size: 1.2em;
+}
+
+.loginBlock a {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    font-size: 1.2em;
+}

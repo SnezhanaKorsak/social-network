@@ -6,6 +6,7 @@ export type PhotosType = {
     small: string
     large: string
 }
+
 export type FriendType = {
     id: number
     photos: PhotosType
@@ -17,12 +18,14 @@ export type FriendType = {
 export type initialStateType = {
     friends: Array<FriendType>
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 
 const initialState: initialStateType = {
     friends: [],
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 export const friendsReducer = (state = initialState, action: ActionType): initialStateType => {
@@ -39,6 +42,11 @@ export const friendsReducer = (state = initialState, action: ActionType): initia
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.isFetching}
 
+        case "FOLLOWING-PROGRESS":
+            return action.isFetching
+                ? {...state, followingInProgress: [...state.followingInProgress, action.userId]}
+                : {...state, followingInProgress: state.followingInProgress.filter(id => id!== action.userId)}
+
         default:
             return state
     }
@@ -49,6 +57,7 @@ type ActionType = ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setFriends>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof followingProgress>
 
 
 export const follow = (userId: number) => {
@@ -74,5 +83,11 @@ export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: "TOGGLE-IS-FETCHING",
         isFetching
+    } as const
+}
+export const followingProgress = (isFetching: boolean, userId: number) => {
+    return {
+        type: "FOLLOWING-PROGRESS",
+        isFetching, userId
     } as const
 }

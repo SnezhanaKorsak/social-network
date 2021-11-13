@@ -1,5 +1,4 @@
 import React from 'react';
-import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {News} from "./components/News/News";
@@ -9,6 +8,7 @@ import './App.css';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsPage} from "./components/Friends/FriendsPage";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from './components/Header/HeaderContainer';
 
 
 type AppPropsType = {
@@ -20,7 +20,8 @@ export const PATH = {
     NEWS: '/news/',
     MUSIC: '/music/',
     SETTINGS: '/settings/',
-    FIND_FRIENDS: '/findFriends/'
+    FIND_FRIENDS: '/findFriends/',
+    LOGIN: '/login/',
 }
 
 
@@ -30,7 +31,7 @@ function App(props: AppPropsType) {
     return (
         <HashRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className='content'>
                     <Switch>
