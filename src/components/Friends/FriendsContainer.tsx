@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {follow, followingProgress, initialStateType, unfollow} from "../../redux/friendsReducer";
+import {followTC, initialStateType, unfollowTC} from "../../redux/friendsReducer";
 import React from "react";
 import {Friends} from "./Friends";
 import {Preloader} from "../../common/Preloader/Preloader";
@@ -13,9 +13,8 @@ class FriendsAPIComponent extends React.Component<FriendsAPIComponentPropsType> 
             {this.props.isFetching ? <Preloader/>
                 : <Friends friendsPage={this.props.friendsPage}
                            followingInProgress = {this.props.followingInProgress}
-                           follow={this.props.follow}
-                           unfollow={this.props.unfollow}
-                           followingProgress={this.props.followingProgress}
+                           followTC={this.props.followTC}
+                           unfollowTC={this.props.unfollowTC}
 
                 />}
         </div>
@@ -30,9 +29,8 @@ export type mapStatePropsType = {
     followingInProgress: Array<number>
 }
 export type mapDispatchPropsType = {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    followingProgress: (isFetching: boolean, userId: number) => void
+    followTC: (userId: number) => void
+    unfollowTC: (userId: number) => void
 
 }
 
@@ -46,4 +44,4 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => {
 
 
 export const FriendsContainer = connect(mapStateToProps,
-    {follow, unfollow, followingProgress})(FriendsAPIComponent)
+    {followTC, unfollowTC})(FriendsAPIComponent)

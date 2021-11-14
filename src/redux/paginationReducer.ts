@@ -1,4 +1,6 @@
-import {toggleIsFetching, setFriends} from "./friendsReducer";
+import {setFriends, toggleIsFetching} from "./friendsReducer";
+import {UserAPI} from "../api/Api";
+import {Dispatch} from "redux";
 
 export type initialStateType = {
     pageLimit: number
@@ -48,3 +50,15 @@ export const setCurrentPage = (page: number) => {
     } as const
 }
 
+export const getUsersTC = (currentPage: number, pageLimit: number) => {
+    return (dispatch: Dispatch<ActionType>) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
+
+        UserAPI.getUsers(currentPage, pageLimit).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setFriends(data.items));
+            dispatch(setTotalCount(data.totalCount))
+        })
+    }
+}

@@ -1,3 +1,6 @@
+import {UserAPI} from "../api/Api";
+import {Dispatch} from "redux";
+
 export  type LocationType = {
     country: string
     city: string
@@ -45,7 +48,7 @@ export const friendsReducer = (state = initialState, action: ActionType): initia
         case "FOLLOWING-PROGRESS":
             return action.isFetching
                 ? {...state, followingInProgress: [...state.followingInProgress, action.userId]}
-                : {...state, followingInProgress: state.followingInProgress.filter(id => id!== action.userId)}
+                : {...state, followingInProgress: state.followingInProgress.filter(id => id !== action.userId)}
 
         default:
             return state
@@ -90,4 +93,23 @@ export const followingProgress = (isFetching: boolean, userId: number) => {
         type: "FOLLOWING-PROGRESS",
         isFetching, userId
     } as const
+}
+
+export const followTC = (userId: number) => {
+    return (dispatch: Dispatch<ActionType>) => {
+        dispatch(followingProgress(true, userId))
+        UserAPI.followUser(userId).then(data => {
+            if (data.resultCode === 0) dispatch(follow(userId))
+            dispatch(followingProgress(false, userId))
+        })
+    }
+}
+export const unfollowTC = (userId: number) => {
+    return (dispatch: Dispatch<ActionType>) => {
+        dispatch(followingProgress(true, userId))
+        UserAPI.unfollowUser(userId).then(data => {
+            if (data.resultCode === 0) dispatch(unfollow(userId))
+            dispatch(followingProgress(false, userId))
+        })
+    }
 }

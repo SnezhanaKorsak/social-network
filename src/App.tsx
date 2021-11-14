@@ -9,6 +9,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsPage} from "./components/Friends/FriendsPage";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from "./components/Login/Login";
 
 
 type AppPropsType = {
@@ -45,6 +46,7 @@ function App(props: AppPropsType) {
                         <Route path={PATH.MUSIC} render={() => <Music/>}/>
                         <Route path={PATH.FIND_FRIENDS} render={() => <FriendsPage/>}/>
                         <Route path={PATH.SETTINGS} render={() => <Settings/>}/>
+                        <Route path={PATH.LOGIN} render={() => <Login/>}/>
                     </Switch>
                 </div>
 

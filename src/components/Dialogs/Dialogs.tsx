@@ -3,16 +3,18 @@ import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogPageType} from "../../redux/dialogsReducer";
+import {Redirect} from "react-router-dom";
+import {PATH} from "../../App";
 
 
 type DialogsProps = {
     dialogPage: DialogPageType;
     addMessage: (messageText: string) => void
     onMessageChange: (newMessage: string) => void
+    isAuth: boolean
 }
 
 export function Dialogs(props: DialogsProps) {
-
 
     const addMessage = () => {
         props.addMessage(props.dialogPage.newTextMessage)
@@ -27,6 +29,8 @@ export function Dialogs(props: DialogsProps) {
 
     let messagesElements =
         props.dialogPage.messages.map(msg => <Message key={msg.id} message={msg.message} id={msg.id}/>);
+
+    if(!props.isAuth) return <Redirect to={PATH.LOGIN}/>
 
     return (
         <>

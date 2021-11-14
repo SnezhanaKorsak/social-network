@@ -1,10 +1,9 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {FriendType, toggleIsFetching, setFriends} from "../../../redux/friendsReducer";
 import React from "react";
 import {Pagination} from "./Pagination";
-import {setCurrentPage, setTotalCount} from "../../../redux/paginationReducer";
-import { getUsers } from "../../../api/Api";
+import {getUsersTC,  setTotalCount} from "../../../redux/paginationReducer";
+
 
 export const LEFT_PAGE = 'LEFT';
 export const RIGHT_PAGE = 'RIGHT';
@@ -25,12 +24,13 @@ const range = (from: number | string, to: number, step = 1) => {
 
 class PaginationAPIComponent extends React.Component<PaginationAPIComponentPropsType> {
     componentDidMount(): void {
-        this.props.toggleIsFetching(true)
+        /*this.props.toggleIsFetching(true)
         getUsers(this.props.currentPage, this.props.pageLimit).then(data => {
                 this.props.toggleIsFetching(false)
                 this.props.setFriends(data.items);
                 this.props.setTotalCount(data.totalCount)
-            })
+            })*/
+        this.props.getUsersTC(this.props.currentPage, this.props.pageLimit)
     }
 
     fetchPageNumbers = () => {
@@ -79,32 +79,18 @@ class PaginationAPIComponent extends React.Component<PaginationAPIComponentProps
     }
 
     handleClick = (page: number | string) => {
-        this.props.toggleIsFetching(true)
+
         if (typeof page === "number") {
-            this.props.setCurrentPage(page)
-            getUsers(page, this.props.pageLimit).then(data => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setFriends(data.items)
-                })
+            this.props.getUsersTC(page, this.props.pageLimit)
         }
     }
     handleMoveLeft = () => {
-        this.props.toggleIsFetching(true)
         const previousPage = this.props.currentPage - (this.props.pageNeighbours * 2) - 1
-        this.props.setCurrentPage(previousPage)
-        getUsers(previousPage, this.props.pageLimit).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setFriends(data.items)
-            })
+        this.props.getUsersTC(previousPage, this.props.pageLimit)
     }
     handleMoveRight = () => {
-        this.props.toggleIsFetching(true)
         const nextPage = this.props.currentPage + (this.props.pageNeighbours * 2) + 1
-        this.props.setCurrentPage(nextPage)
-        getUsers(nextPage, this.props.pageLimit).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setFriends(data.items)
-            })
+        this.props.getUsersTC(nextPage, this.props.pageLimit)
     }
 
     render(): React.ReactNode {
@@ -130,10 +116,8 @@ export type mapStatePropsType = {
 
 }
 export type mapDispatchPropsType = {
-    setCurrentPage: (page: number) => void
     setTotalCount: (totalCount: number) => void
-    setFriends: (friends: Array<FriendType>) => void
-    toggleIsFetching: (isFetching: boolean) => void
+    getUsersTC: (currentPage: number, pageLimit: number) => void
 }
 
 const mapStateToProps = (state: AppStateType): mapStatePropsType => {
@@ -163,8 +147,6 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => {
 }*/
 
 export const PaginationContainer = connect(mapStateToProps, {
-    setFriends,
-    setCurrentPage,
     setTotalCount,
-    toggleIsFetching
+    getUsersTC: getUsersTC,
 })(PaginationAPIComponent)

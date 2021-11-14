@@ -1,4 +1,3 @@
-import React from "react";
 import {addMessageAC, DialogPageType, onMessageChangeAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
@@ -32,6 +31,7 @@ import {Dispatch} from "redux";
 
 type MapStatePropsType = {
     dialogPage: DialogPageType
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -41,7 +41,8 @@ type MapDispatchPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        dialogPage: state.dialogPage
+        dialogPage: state.dialogPage,
+        isAuth: state.auth.isAuth
     }
 }
 
