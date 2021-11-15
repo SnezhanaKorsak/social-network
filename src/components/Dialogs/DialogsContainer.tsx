@@ -2,7 +2,10 @@ import {addMessageAC, DialogPageType, onMessageChangeAC} from "../../redux/dialo
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import React from "react";
+
 
 //здесь пример с использование Consumer
 /*export function DialogsContainer(props: DialogsContainerProps) {
@@ -31,7 +34,6 @@ import {Dispatch} from "redux";
 
 type MapStatePropsType = {
     dialogPage: DialogPageType
-    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -42,7 +44,6 @@ type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         dialogPage: state.dialogPage,
-        isAuth: state.auth.isAuth
     }
 }
 
@@ -57,4 +58,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
