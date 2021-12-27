@@ -6,6 +6,7 @@ import {friendsReducer} from "./friendsReducer";
 import {paginationReducer} from "./paginationReducer";
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from 'redux-form'
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
@@ -15,7 +16,8 @@ let rootReducer = combineReducers({
     sidebar: sideBarReducer,
     friendsPage: friendsReducer,
     pagination: paginationReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer,
 })
 
 export let store = createStore(rootReducer, applyMiddleware(thunk))

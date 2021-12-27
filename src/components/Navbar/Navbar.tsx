@@ -25,6 +25,9 @@ export function Navbar () {
                 <div className={s.item}>
                     <NavLink to={PATH.SETTINGS} activeClassName={s.active}>Settings</NavLink>
                 </div>
+                <div className={s.item}>
+                    <NavLink to={PATH.LOGIN} activeClassName={s.active}>Login</NavLink>
+                </div>
             </nav>
 
     )

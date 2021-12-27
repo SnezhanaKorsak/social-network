@@ -3,7 +3,6 @@ import {ProfileAPI} from "../api/Api";
 
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE';
 const SET_USER_STATUS = 'SET-USER-STATUS';
 
@@ -38,7 +37,6 @@ export type ProfileType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
@@ -49,7 +47,6 @@ const initialState: ProfilePageType = {
         {id: 1, message: "Hi, how are you?", likeCount: 12},
         {id: 2, message: "It's my first post", likeCount: 24},
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -63,10 +60,10 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
                 likeCount: 0
             }
 
-            return {...state, posts: [...state.posts, newPost], newPostText: ''};
+            return {...state, posts: [...state.posts, newPost]};
 
-        case UPDATE_NEW_POST:
-            return {...state, newPostText: action.newText};
+        // case UPDATE_NEW_POST:
+        //     return {...state, newPostText: action.newText};
 
         case "SET-USERS-PROFILE":
             return {...state, profile: action.profile}
@@ -81,7 +78,6 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 }
 
 type ActionType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setUserStatus>
 
@@ -92,12 +88,12 @@ export const addPostAC = (postText: string) => {
     } as const
 }
 
-export const onPostChangeAC = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST,
-        newText
-    } as const
-}
+// export const onPostChangeAC = (newText: string) => {
+//     return {
+//         type: UPDATE_NEW_POST,
+//         newText
+//     } as const
+// }
 export const setUsersProfile = (profile: ProfileType | null) => {
     return {
         type: SET_USERS_PROFILE,

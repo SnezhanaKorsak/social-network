@@ -1,6 +1,6 @@
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+
 
 export type DialogType = {
     id: number;
@@ -13,7 +13,6 @@ export type MessageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>;
     messages: Array<MessageType>;
-    newTextMessage: string
 }
 
 const initialState: DialogPageType = {
@@ -29,7 +28,7 @@ const initialState: DialogPageType = {
         {id: 3, message: "Just do it"},
         {id: 4, message: "Could you help me?"}
     ],
-    newTextMessage: '',
+
 }
 
 export const dialogReducer = (state = initialState, action: ActionType):DialogPageType => {
@@ -39,18 +38,18 @@ export const dialogReducer = (state = initialState, action: ActionType):DialogPa
             id:  new Date().getTime(),
             message: action.messageText
         }
-            return {...state, messages: [...state.messages, newMessage], newTextMessage: ''}
+            return {...state, messages: [...state.messages, newMessage]}
 
-        case UPDATE_NEW_MESSAGE:
-           // state.newTextMessage = action.newMessage
-            return {...state, newTextMessage: action.newMessage}
+        // case UPDATE_NEW_MESSAGE:
+        //    // state.newTextMessage = action.newMessage
+        //     return {...state, newTextMessage: action.newMessage}
 
         default:
             return state
     }
 }
 
-type ActionType = ReturnType<typeof addMessageAC> | ReturnType<typeof onMessageChangeAC>
+type ActionType = ReturnType<typeof addMessageAC>
 
 export const addMessageAC = (messageText: string) => {
     return {
@@ -59,9 +58,9 @@ export const addMessageAC = (messageText: string) => {
     } as const
 }
 
-export const onMessageChangeAC = (newMessage: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        newMessage: newMessage
-    } as const
-}
+// export const onMessageChangeAC = (newMessage: string) => {
+//     return {
+//         type: UPDATE_NEW_MESSAGE,
+//         newMessage: newMessage
+//     } as const
+// }
