@@ -3,13 +3,20 @@ import s from './ProfileInfo.module.css';
 import {ProfileType} from "../../../redux/profileReducer";
 import {Preloader} from "../../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/noavatar.png";
+import {ProfileStatus} from "../Status/ProfileStatus";
 
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
+                                                                profile,
+                                                                status,
+                                                                updateStatus
+                                                            }) => {
     if (!profile) {
         return <Preloader/>
     }
@@ -41,8 +48,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
                             {profile.lookingForAJob ? "I'm locking for a job"
                                 : profile.lookingForAJobDescription ? profile.lookingForAJobDescription
                                     : 'no information'}<br/>
-                            {profile.lookingForAJobDescription ? profile.lookingForAJobDescription
-                                : 'no information'}<br/>
+                            {/*{profile.lookingForAJobDescription ? profile.lookingForAJobDescription*/}
+                            {/*    : 'no information'}<br/>*/}
+                            <ProfileStatus status={status} updateStatus={updateStatus}/>
                         </div>
                     </div>
 

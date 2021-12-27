@@ -12,7 +12,7 @@ export function Post(props: PostTypeProps) {
         <div>
             <div className={s.posts}>
                 <div className={s.item}>
-                    <img src='https://telegra.ph/file/88a8f1c2805439c4c0d86.jpg'/>
+                    <img src='https://telegra.ph/file/88a8f1c2805439c4c0d86.jpg' alt='avatar'/>
                     {props.message}
                     <div>
                         <span>like: {props.likeCount} </span>

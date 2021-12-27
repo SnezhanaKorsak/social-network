@@ -148,5 +148,5 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => {
 
 export const PaginationContainer = connect(mapStateToProps, {
     setTotalCount,
-    getUsersTC: getUsersTC,
+    getUsersTC,
 })(PaginationAPIComponent)

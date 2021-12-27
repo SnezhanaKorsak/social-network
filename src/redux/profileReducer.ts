@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
-import {UserAPI} from "../api/Api";
+import {ProfileAPI} from "../api/Api";
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE';
+const SET_USER_STATUS = 'SET-USER-STATUS';
 
 export type PostType = {
     id: number;
@@ -27,7 +28,7 @@ type PhotosType = {
 }
 export type ProfileType = {
     aboutMe: string
-    "contacts": ContactsType
+    contacts: ContactsType
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -39,6 +40,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: ProfileType | null
+    status: string
 }
 
 
@@ -48,7 +50,8 @@ const initialState: ProfilePageType = {
         {id: 2, message: "It's my first post", likeCount: 24},
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 export const profileReducer = (state = initialState, action: ActionType): ProfilePageType => {
@@ -68,6 +71,10 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
         case "SET-USERS-PROFILE":
             return {...state, profile: action.profile}
 
+        case "SET-USER-STATUS":
+            return {...state, status: action.status}
+
+
         default:
             return state;
     }
@@ -76,6 +83,7 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 type ActionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof setUsersProfile>
+    | ReturnType<typeof setUserStatus>
 
 export const addPostAC = (postText: string) => {
     return {
@@ -93,14 +101,37 @@ export const onPostChangeAC = (newText: string) => {
 export const setUsersProfile = (profile: ProfileType | null) => {
     return {
         type: SET_USERS_PROFILE,
-       profile
+        profile
+    } as const
+}
+export const setUserStatus = (status: string) => {
+    return {
+        type: SET_USER_STATUS,
+        status
     } as const
 }
 
 export const getUserProfileTC = (userId: string) => {
     return (dispatch: Dispatch<ActionType>) => {
-        UserAPI.getUsersProfile(userId).then(data => {
+        ProfileAPI.getUsersProfile(userId).then(data => {
             dispatch(setUsersProfile(data));
         })
+    }
+}
+export const getUserStatusTC = (userId: string) => {
+    return (dispatch: Dispatch<ActionType>) => {
+        ProfileAPI.getStatus(userId).then(res => {
+            dispatch(setUserStatus(res.data));
+        })
+    }
+}
+export const updateStatusTC = (status: string) => {
+    return (dispatch: Dispatch<ActionType>) => {
+        ProfileAPI.updateStatus(status)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setUserStatus(status));
+                }
+            })
     }
 }

@@ -13,9 +13,7 @@ import {Login} from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
-type AppPropsType = {
-    /*store: StoreType*/
-}
+
 export const PATH = {
     PROFILE: '/profile/',
     DIALOGS: '/dialogs/',
@@ -27,7 +25,7 @@ export const PATH = {
 }
 
 
-function App(props: AppPropsType) {
+function App() {
     /* const state = props.store.getState();*/
 
     return (
