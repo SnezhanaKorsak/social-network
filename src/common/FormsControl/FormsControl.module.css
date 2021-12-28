@@ -1,0 +1,52 @@
+.formControl textarea {
+    width: 500px;
+    min-height: 100px;
+    margin: 25px 0 0 0;
+    font-size: 1.2em;
+    resize: none;
+    padding-left: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+.formControl input {
+    width: 200px;
+    margin-top: 10px;
+    resize: none;
+    padding-left: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.formControl.error textarea {
+    box-sizing: border-box;
+    border: 3px solid #ff4b4c;
+    margin: 2px 0 0 0;
+    outline: none;
+}
+.formControl.error input {
+    box-sizing: border-box;
+    border: 2px solid #ff4b4c;
+    margin: 2px 0 0 0;
+    outline: none;
+}
+
+.errorMessage {
+    box-sizing: border-box;
+    min-width: 100px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    font-family: Montserrat, sans-serif;
+    animation: blink1 3s linear infinite;
+}
+
+@keyframes blink1 {
+    0% {
+        color: #ff4b4c;
+    }
+    50% {
+        color: #ffe4c4;
+    }
+    100% {
+        color: #ff4b4c;
+    }
+}

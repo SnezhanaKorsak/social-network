@@ -6,3 +6,12 @@
 .item {
     margin-top: 15px;
 }
+.item button {
+    position: relative;
+    left: 50px;
+    width: 100px;
+    height: 30px;
+    background-color: #ff4b4c;
+    margin: 10px 0 10px 0;
+    cursor: pointer;
+}
