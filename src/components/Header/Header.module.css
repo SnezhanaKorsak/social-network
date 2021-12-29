@@ -15,10 +15,25 @@
     padding: 5px;
     font-size: 1.2em;
 }
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .loginBlock a {
     text-decoration: none;
     color: white;
     padding: 5px;
     font-size: 1.2em;
+}
+.loginBlock button {
+    width: 80px;
+    height: 30px;
+    background-color: #d39bff;
+    margin-top: 10px;
+    color: #f8e8ec;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
 }

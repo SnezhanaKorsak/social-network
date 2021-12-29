@@ -9,7 +9,7 @@ import './App.css';
 import {FriendsPage} from "./components/Friends/FriendsPage";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
-import {Login} from "./components/Login/Login";
+import Login from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
