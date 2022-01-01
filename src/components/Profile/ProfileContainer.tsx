@@ -11,7 +11,8 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount(): void {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.userAuthId as string
+            debugger
+           userId = this.props.userAuthId as string
         }
         this.props.getUserProfileTC(userId)
         this.props.getUserStatusTC(userId)

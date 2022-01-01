@@ -37,9 +37,9 @@ export const setAuthUserData = (userId: string | null, email: string | null, log
         payload: {userId, email, login, isAuth}
     } as const
 }
-export const getUserAPIDataTC = (): ThunkAction<void, AppStateType, unknown, ActionType> => {
+export const getUserAPIDataTC = (): ThunkAction<any, AppStateType, unknown, ActionType> => {
     return (dispatch) => {
-        AuthAPI.me().then(data => {
+       return  AuthAPI.me().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
                 dispatch(setAuthUserData(id, email, login, true))
